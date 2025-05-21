@@ -126,6 +126,26 @@
             outline: none;
             transition: border 0.3s ease;
         }
+        #mic-btn {
+    width: 15%;
+    padding: 12px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-left: 5px;
+}
+
+#mic-btn:hover {
+    background-color: #e67e22;
+}
+
+#mic-btn:active {
+    transform: scale(0.95);
+}
 
         .chat-input-container input:focus {
             border: 1px solid #4e8d7c;
@@ -244,6 +264,7 @@
         <div class="chat-input-container">
             <input type="text" id="user-input" placeholder="Type a message..." />
             <button id="send-btn">Send</button>
+            <button id="mic-btn">🎤</button>
         </div>
     </div>
 
@@ -350,6 +371,42 @@
         scrollToBottomBtn.addEventListener('click', () => {
             chatContainer.scrollTop = chatContainer.scrollHeight;
         });
+        const micBtn = document.getElementById('mic-btn');
+    const userInput = document.getElementById('user-input');
+
+    // Initialize Speech Recognition
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US'; // You can change this to 'ur-PK' or other if needed
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        micBtn.addEventListener('click', () => {
+            recognition.start();
+            micBtn.innerText = "🎙️";
+        });
+
+        recognition.onresult = function (event) {
+            const voiceText = event.results[0][0].transcript;
+            userInput.value = voiceText;
+            micBtn.innerText = "🎤";
+            sendMessage();  // Send message automatically
+        };
+
+        recognition.onerror = function (event) {
+            console.error("Speech recognition error:", event.error);
+            micBtn.innerText = "🎤";
+        };
+
+        recognition.onend = function () {
+            micBtn.innerText = "🎤";
+        };
+    } else {
+        alert("Your browser does not support Speech Recognition. Try using Chrome.");
+        micBtn.disabled = true;
+    }
     </script>
 </body>
 </html>

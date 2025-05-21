@@ -30,35 +30,61 @@ def perform_action(drone_state):
         if "take off" in drone_state:
             print(" Taking Off!")
             tello.takeoff()
+
         elif "land" in drone_state:
             print(" Landing!")
             tello.land()
-        elif "forward" in drone_state:
+
+        elif "forward" in drone_state or "pitch up" in drone_state:
             print("⬆ Moving Forward")
             tello.move_forward(30)
-        elif "backward" in drone_state:
+
+        elif "backward" in drone_state or "pitch down" in drone_state:
             print("⬇ Moving Backward")
             tello.move_back(30)
-        elif "left" in drone_state:
+
+        elif "left" in drone_state and "yaw" not in drone_state and "roll" not in drone_state:
             print("⬅ Moving Left")
             tello.move_left(30)
-        elif "right" in drone_state:
+
+        elif "right" in drone_state and "yaw" not in drone_state and "roll" not in drone_state:
             print("➡ Moving Right")
             tello.move_right(30)
+
         elif "up" in drone_state:
-            print(" Moving Up")
+            print("⬆ Ascending")
             tello.move_up(50)
+
         elif "down" in drone_state:
-            print(" Moving Down")
+            print("⬇ Descending")
             tello.move_down(30)
+
         elif "flip" in drone_state:
             print(" Flipping")
-            tello.flip("f")
+            tello.flip_back()
+
+        elif "yaw left" in drone_state:
+            print("↪ Rotating Counter Clockwise")
+            tello.rotate_counter_clockwise(45)
+
+        elif "yaw right" in drone_state:
+            print("↩ Rotating Clockwise")
+            tello.rotate_clockwise(45)
+
+        elif "roll left" in drone_state:
+            print("↙ Rolling Left")
+            tello.move_left(30)
+
+        elif "roll right" in drone_state:
+            print("↘ Rolling Right")
+            tello.move_right(30)
+
         else:
             print(f"⚠ Unknown drone command: {drone_state}")
 
     command_thread = threading.Thread(target=execute_command)
     command_thread.start()
+
 
 
 def get_bot_response(user_input):

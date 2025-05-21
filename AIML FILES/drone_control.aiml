@@ -45,6 +45,17 @@
   </template>
 </category>
 
+<!-- Pattern for Take Off commands -->
+ <category>
+  <pattern>FLIP</pattern>
+  <template>
+    The drone is FLIPPING!
+    <think>
+      <set name="direction">flip</set>
+    </think>
+  </template>
+</category>
+
  <category>
   <pattern>* TAKE OFF</pattern>
   <template>

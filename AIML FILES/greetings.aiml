@@ -213,4 +213,26 @@
         <template>Alright, talk to you later! I’ll be here when you need me.</template>
     </category>
 
+    <category>
+        <pattern>* FUNCTIONS *</pattern>
+        <template>I can perform every Drone function i.e move up, down, left, right. I can also make the Rotation performs like yaw, spin and rotate.</template>
+    </category>
+
+    <category>
+        <pattern>GOOD</pattern>
+        <template>Glad! You Liked it!</template>
+    </category>
+    <category>
+        <pattern>GREAT</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>STUNNING</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+
 </aiml>
