@@ -49,10 +49,18 @@ def perform_action(drone_state):
     command_thread = threading.Thread(target=execute_command)
     command_thread.start()
 
+def dummy_face_detection():
+    print("Simulating face detection...")
+    return "Face detected successfully!"
+
 def get_bot_response(user_input):
     response = kernel.respond(user_input)
-    return response if response else "Sorry, I don't understand that."
 
+    if "detect face" in user_input.lower() or "scan face" in user_input.lower():
+        detection_result = dummy_face_detection()
+        return f"{response}\n{detection_result}"
+
+    return response if response else "Sorry, I don't understand that."
 @app.route("/")
 def home():
     return render_template("index.html")

@@ -252,4 +252,14 @@
   </template>
 </category>
 
+<category>
+    <pattern>DETECT FACE</pattern>
+    <template>Initiating face detection protocol...</template>
+  </category>
+
+  <category>
+    <pattern>SCAN FACE</pattern>
+    <template>Sure! Scanning for faces now...</template>
+  </category>
+
 </aiml>
